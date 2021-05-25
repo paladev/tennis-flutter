@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc_login/repository/clubs_repository.dart';
-import 'package:bloc_login/model/tournament_model.dart';
+import 'package:bloc_login/model/clubs.dart';
 import 'package:bloc_login/bloc/clubs/clubs_event.dart';
 import 'package:bloc_login/bloc/clubs/clubs_state.dart';
 

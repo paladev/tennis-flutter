@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:bloc_login/model/tournament_model.dart';
+import 'package:bloc_login/model/clubs.dart';
 
 abstract class ClubsState extends Equatable {}
 

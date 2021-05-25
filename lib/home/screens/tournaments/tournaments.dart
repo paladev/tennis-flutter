@@ -1,24 +1,26 @@
-import 'package:bloc_login/repository/clubs_repository.dart';
+import 'package:bloc_login/home/screens/clubs/clubs.dart';
+import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
+import 'package:bloc_login/repository/tournaments_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:bloc_login/bloc/clubs/clubs_bloc.dart';
-import 'package:bloc_login/bloc/clubs/clubs_event.dart';
-import 'package:bloc_login/bloc/clubs/clubs_state.dart';
+import 'package:bloc_login/bloc/tournaments/tournaments_bloc.dart';
+import 'package:bloc_login/bloc/tournaments/tournaments_event.dart';
+import 'package:bloc_login/bloc/tournaments/tournaments_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc_login/model/tournament_model.dart';
+import 'package:bloc_login/model/tournaments.dart';
 
-class ClubsListScreen extends StatefulWidget {
+class TournamentsListScreen extends StatefulWidget {
   @override
-  _ClubsListScreenState createState() => _ClubsListScreenState();
+  _TournamentsListScreenState createState() => _TournamentsListScreenState();
 }
 
-class _ClubsListScreenState extends State<ClubsListScreen> {
-  ClubsBloc clubsBloc;
+class _TournamentsListScreenState extends State<TournamentsListScreen> {
+  TournamentsBloc tournamentsBloc;
 
   @override
   void initState() {
     super.initState();
-    clubsBloc = BlocProvider.of<ClubsBloc>(context);
-    clubsBloc.add(FetchClubsEvent());
+    tournamentsBloc = BlocProvider.of<TournamentsBloc>(context);
+    tournamentsBloc.add(FetchTournamentsEvent());
   }
 
   @override
@@ -28,7 +30,13 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
         builder: (context) {
           return Material(
             child: Scaffold(
-              appBar: AppBar(title: const Text('Counter')),
+              appBar: AppBar(
+                title: const Text('Список турниров'),
+                leading: IconButton(icon:Icon(Icons.chevron_left),onPressed:() => Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ClubsScreen();
+                  }),
+                ),),
+              ),
               // appBar: AppBar(
               //   title: Text("Cricket"),
               //   actions: <Widget>[
@@ -46,9 +54,9 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
               //   ],
               // ),
               body: Container(
-                child: BlocListener<ClubsBloc, ClubsState>(
+                child: BlocListener<TournamentsBloc, TournamentsState>(
                   listener: (context, state) {
-                    if (state is ClubsErrorState) {
+                    if (state is TournamentsErrorState) {
                       Scaffold.of(context).showSnackBar(
                         SnackBar(
                           content: Text(state.message),
@@ -56,15 +64,15 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
                       );
                     }
                   },
-                  child: BlocBuilder<ClubsBloc, ClubsState>(
+                  child: BlocBuilder<TournamentsBloc, TournamentsState>(
                     builder: (context, state) {
-                      if (state is ClubsInitialState) {
+                      if (state is TournamentsInitialState) {
                         return buildLoading();
-                      } else if (state is ClubsLoadingState) {
+                      } else if (state is TournamentsLoadingState) {
                         return buildLoading();
-                      } else if (state is ClubsLoadedState) {
-                        return buildArticleList(state.clubs);
-                      } else if (state is ClubsErrorState) {
+                      } else if (state is TournamentsLoadedState) {
+                        return buildArticleList(state.tournaments);
+                      } else if (state is TournamentsErrorState) {
                         return buildErrorUi(state.message);
                       }
                     },
@@ -96,9 +104,9 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
     );
   }
 
-  Widget buildArticleList(List<Clubs> clubs) {
+  Widget buildArticleList(List<Tournaments> tournaments) {
     return ListView.builder(
-      itemCount: clubs.length,
+      itemCount: tournaments.length,
       itemBuilder: (ctx, pos) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -108,8 +116,8 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
                 // child: Hero(
                 // ),
               ),
-              title: Text(clubs[pos].name),
-              subtitle: Text(clubs[pos].role),
+              title: Text(tournaments[pos].name),
+              subtitle: Text(tournaments[pos].start),
             ),
             onTap: () {
             },
@@ -119,19 +127,21 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
     );
   }
 
-  // void navigateToArticleDetailPage(BuildContext context, Clubs clubs) {
-  //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-  //     return ArticleDetailPage(
-  //       article: article,
-  //     );
-  //   }));
-  // }
-  //
-  // void navigateToAoutPage(BuildContext context) {
-  //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-  //     return AboutPage();
-  //   }));
-  // }
+
+
+// void navigateToArticleDetailPage(BuildContext context, Clubs clubs) {
+//   Navigator.push(context, MaterialPageRoute(builder: (context) {
+//     return ArticleDetailPage(
+//       article: article,
+//     );
+//   }));
+// }
+//
+// void navigateToAoutPage(BuildContext context) {
+//   Navigator.push(context, MaterialPageRoute(builder: (context) {
+//     return AboutPage();
+//   }));
+// }
 }
 // class MainScreen56 extends StatelessWidget {
 //   const MainScreen56({Key key}) : super(key: key);

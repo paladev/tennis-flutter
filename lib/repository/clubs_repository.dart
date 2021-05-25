@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:bloc_login/model/tournament_model.dart';
+import 'package:bloc_login/model/clubs.dart';
 import 'package:bloc_login/model/user_model.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc_login/model/api_model.dart';

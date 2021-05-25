@@ -3,7 +3,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 
 import 'screens.dart';
-import 'screens/addgame/addgame_page.dart';
+import 'screens/clubs/clubs_page.dart';
 import 'package:hexcolor/hexcolor.dart';
 // ----------------------------------------- Provided Style ----------------------------------------- //
 

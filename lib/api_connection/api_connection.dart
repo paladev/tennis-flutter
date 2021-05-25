@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:bloc_login/model/tournaments.dart';
 import 'package:http/http.dart' as http;
 import 'package:bloc_login/model/api_model.dart';
-import 'package:bloc_login/model/tournament_model.dart';
+import 'package:bloc_login/model/clubs.dart';
 import 'dart:developer';
 
 final _base = "https://api.tennis-network.com";
@@ -24,6 +25,24 @@ class ApiResultModel {
     }
   }
 }
+
+class TournamentsResultModel {
+  // String status;
+  // int totalResults;
+  List<Tournaments> tournaments;
+
+  TournamentsResultModel({this.tournaments});
+
+  TournamentsResultModel.fromJson(Map<String, dynamic> json) {
+    if (json['items'] != null) {
+      tournaments = new List<Tournaments>();
+      json['items'].forEach((v) {
+      tournaments.add(new Tournaments.fromJson(v));
+    });
+    }
+  }
+}
+
 Future<Token> getToken(UserLogin userLogin) async {
   final _tokenEndpoint = "/player/login";
   final _tokenURL = _base + _tokenEndpoint;
@@ -59,6 +78,26 @@ Future<List<Clubs>> fetchClubs(Info info) async {
     print(parsed[0]['name'].toString());
     List<Clubs> clubs = ApiResultModel.fromJson(parsed).clubs;
     return clubs;
+  } else {
+    // print(json.decode(response.body).toString());
+    throw Exception(json.decode(response.body));
+  }
+}
+
+Future<List<Tournaments>> fetchTournaments(int id) async {
+  final _clubsUrl = _base + "/club/" + "$id" + "/tournaments";
+  final http.Response response = await http.get(
+    _clubsUrl,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    print(json.decode(response.body).toString());
+    var parsed = json.decode(response.body);
+    // print(parsed[0]['name'].toString());
+    List<Tournaments> tournaments = TournamentsResultModel.fromJson(parsed).tournaments;
+    return tournaments;
   } else {
     // print(json.decode(response.body).toString());
     throw Exception(json.decode(response.body));
