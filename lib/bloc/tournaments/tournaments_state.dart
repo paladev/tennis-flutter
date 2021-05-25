@@ -1,36 +1,35 @@
-import 'package:boring_flutter_app/data/model/api_result_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:bloc_login/model/tournament_model.dart';
 
-abstract class ArticleState extends Equatable {}
+abstract class TournamentsState extends Equatable {}
 
-class ArticleInitialState extends ArticleState {
+class TournamentsInitialState extends TournamentsState {
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
+class TournamentsLoadingState extends TournamentsState {
   @override
   // TODO: implement props
   List<Object> get props => [];
 }
 
-class ArticleLoadingState extends ArticleState {
-  @override
-  // TODO: implement props
-  List<Object> get props => [];
-}
+class TournamentsLoadedState extends TournamentsState {
 
-class ArticleLoadedState extends ArticleState {
+  List<Tournaments> tournaments;
 
-  List<Articles> articles;
-
-  ArticleLoadedState({@required this.articles});
+  TournamentsLoadedState({@required this.tournaments});
 
   @override
-  List<Object> get props => [articles];
+  List<Object> get props => [tournaments];
 }
 
-class ArticleErrorState extends ArticleState {
+class TournamentsErrorState extends TournamentsState {
 
   String message;
 
-  ArticleErrorState({@required this.message});
+  TournamentsErrorState({@required this.message});
 
   @override
   // TODO: implement props

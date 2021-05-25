@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
-abstract class ArticleEvent extends Equatable{}
+abstract class TournamentsEvent extends Equatable{}
 
-class FetchArticlesEvent extends ArticleEvent {
+class FetchTournamentsEvent extends TournamentsEvent {
   @override
   List<Object> get props => null;
 }
