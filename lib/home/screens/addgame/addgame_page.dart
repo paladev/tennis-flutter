@@ -11,7 +11,6 @@ class ClubsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Cricket',
       home: BlocProvider(
         create: (BuildContext context) => TournamentsBloc(repository: TournamentsRepository()),
         child: MainScreen56(),

@@ -28,22 +28,22 @@ class _MainScreen56State extends State<MainScreen56> {
         builder: (context) {
           return Material(
             child: Scaffold(
-              appBar: AppBar(
-                title: Text("Cricket"),
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.refresh),
-                    onPressed: () {
-                      tournamentsBloc.add(FetchTournamentsEvent());
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.info),
-                    onPressed: () {
-                    },
-                  )
-                ],
-              ),
+              // appBar: AppBar(
+              //   title: Text("Cricket"),
+              //   actions: <Widget>[
+              //     IconButton(
+              //       icon: Icon(Icons.refresh),
+              //       onPressed: () {
+              //         tournamentsBloc.add(FetchTournamentsEvent());
+              //       },
+              //     ),
+              //     IconButton(
+              //       icon: Icon(Icons.info),
+              //       onPressed: () {
+              //       },
+              //     )
+              //   ],
+              // ),
               body: Container(
                 child: BlocListener<TournamentsBloc, TournamentsState>(
                   listener: (context, state) {
