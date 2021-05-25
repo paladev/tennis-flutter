@@ -11,8 +11,8 @@ class TournamentsRepository {
 
   Future<List<Tournaments>> getTournaments () async {
     Info info = await userDao.getInfo(0);
-
-    return ;
+    List<Tournaments> tournaments = await fetchTournaments(info);
+    return tournaments;
   }
 
 }

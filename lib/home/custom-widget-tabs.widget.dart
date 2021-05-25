@@ -3,7 +3,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 
 import 'screens.dart';
-import 'screens/addgame/addgame.dart';
+import 'screens/addgame/addgame_page.dart';
 import 'package:hexcolor/hexcolor.dart';
 // ----------------------------------------- Provided Style ----------------------------------------- //
 
@@ -40,7 +40,7 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
         },
       ),
       MainScreen2(),
-      MainScreen56(),
+      ClubsScreen(),
       MainScreen(
         menuScreenContext: widget.menuScreenContext,
         hideStatus: _hideNavBar,

@@ -38,10 +38,13 @@ class UserDao {
     final db = await dbProvider.database;
     final List<Map<String, dynamic>> maps = await db
         .query(userTable, where: "id = ?", whereArgs: [id]);
+    Info info;
     print(maps);
-    return Info(
-      uid: maps[0]['uid'],
-      token: maps[0]['token']
+    info = Info(
+        uid: maps[0]['uid'],
+        token: maps[0]['token']
     );
+    print(info);
+    return info;
   }
 }

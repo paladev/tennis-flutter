@@ -25,7 +25,7 @@ class Token{
 }
 
 class Info{
-  int uid;
+  String uid;
   String token;
   Info({this.uid ,this.token});
 
