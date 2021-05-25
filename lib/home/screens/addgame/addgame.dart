@@ -6,12 +6,12 @@ import 'package:bloc_login/bloc/tournaments/tournaments_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_login/model/tournament_model.dart';
 
-class MainScreen56 extends StatefulWidget {
+class ClubsListScreen extends StatefulWidget {
   @override
-  _MainScreen56State createState() => _MainScreen56State();
+  _ClubsListScreenState createState() => _ClubsListScreenState();
 }
 
-class _MainScreen56State extends State<MainScreen56> {
+class _ClubsListScreenState extends State<ClubsListScreen> {
   TournamentsBloc tournamentsBloc;
 
   @override
@@ -28,6 +28,7 @@ class _MainScreen56State extends State<MainScreen56> {
         builder: (context) {
           return Material(
             child: Scaffold(
+              appBar: AppBar(title: const Text('Counter')),
               // appBar: AppBar(
               //   title: Text("Cricket"),
               //   actions: <Widget>[

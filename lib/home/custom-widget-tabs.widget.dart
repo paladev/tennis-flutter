@@ -130,17 +130,17 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Navigation Bar Demo')),
-      drawer: Drawer(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('This is the Drawer'),
-            ],
-          ),
-        ),
-      ),
+      // appBar: AppBar(title: const Text('Navigation Bar Demo')),
+      // drawer: Drawer(
+      //   child: Center(
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: <Widget>[
+      //         const Text('This is the Drawer'),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: PersistentTabView(
         context,
         controller: _controller,
