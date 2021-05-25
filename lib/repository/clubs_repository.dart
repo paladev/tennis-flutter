@@ -6,13 +6,13 @@ import 'package:bloc_login/model/api_model.dart';
 import 'package:bloc_login/api_connection/api_connection.dart';
 import 'package:bloc_login/dao/user_dao.dart';
 
-class TournamentsRepository {
+class ClubsRepository {
   final userDao = UserDao();
 
-  Future<List<Tournaments>> getTournaments () async {
+  Future<List<Clubs>> getClubs () async {
     Info info = await userDao.getInfo(0);
-    List<Tournaments> tournaments = await fetchTournaments(info);
-    return tournaments;
+    List<Clubs> clubs = await fetchClubs(info);
+    return clubs;
   }
 
 }

@@ -10,17 +10,17 @@ final _base = "https://api.tennis-network.com";
 class ApiResultModel {
   // String status;
   // int totalResults;
-  List<Tournaments> tournaments;
+  List<Clubs> clubs;
 
-  ApiResultModel({this.tournaments});
+  ApiResultModel({this.clubs});
 
   ApiResultModel.fromJson(List<dynamic> json) {
     // status = json['status'];
     // totalResults = json['totalResults'];
-    tournaments = new List<Tournaments>();
+    clubs = new List<Clubs>();
 
     for (var i=0; i<json.length; i++) {
-      tournaments.add(new Tournaments.fromJson(json[i]));
+      clubs.add(new Clubs.fromJson(json[i]));
     }
   }
 }
@@ -44,11 +44,11 @@ Future<Token> getToken(UserLogin userLogin) async {
   }
 }
 
-Future<List<Tournaments>> fetchTournaments(Info info) async {
-  final _tournamentsUrl = _base + "/player/" + info.uid + "/clubs";
-  print(_tournamentsUrl);
+Future<List<Clubs>> fetchClubs(Info info) async {
+  final _clubsUrl = _base + "/player/" + info.uid + "/clubs";
+  print(_clubsUrl);
   final http.Response response = await http.get(
-    _tournamentsUrl,
+    _clubsUrl,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -57,8 +57,8 @@ Future<List<Tournaments>> fetchTournaments(Info info) async {
     print(json.decode(response.body).toString());
     var parsed = json.decode(response.body);
     print(parsed[0]['name'].toString());
-    List<Tournaments> tournaments = ApiResultModel.fromJson(parsed).tournaments;
-    return tournaments;
+    List<Clubs> clubs = ApiResultModel.fromJson(parsed).clubs;
+    return clubs;
   } else {
     // print(json.decode(response.body).toString());
     throw Exception(json.decode(response.body));

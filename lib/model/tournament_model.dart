@@ -1,15 +1,15 @@
 import 'package:equatable/equatable.dart';
 
-class Tournaments {
+class Clubs {
   final int id;
   final String name;
   final bool isMain;
   final String role;
 
-  Tournaments({this.id, this.name, this.isMain, this.role});
+  Clubs({this.id, this.name, this.isMain, this.role});
 
-  factory Tournaments.fromJson(Map<String, dynamic> json) {
-    return Tournaments(
+  factory Clubs.fromJson(Map<String, dynamic> json) {
+    return Clubs(
       id: json['id'] as int,
       name: json['name'] as String,
       isMain: json['isMain'] as bool,

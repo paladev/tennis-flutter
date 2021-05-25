@@ -1,8 +1,8 @@
-import 'package:bloc_login/repository/tournaments_repository.dart';
+import 'package:bloc_login/repository/clubs_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:bloc_login/bloc/tournaments/tournaments_bloc.dart';
-import 'package:bloc_login/bloc/tournaments/tournaments_event.dart';
-import 'package:bloc_login/bloc/tournaments/tournaments_state.dart';
+import 'package:bloc_login/bloc/clubs/clubs_bloc.dart';
+import 'package:bloc_login/bloc/clubs/clubs_event.dart';
+import 'package:bloc_login/bloc/clubs/clubs_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_login/model/tournament_model.dart';
 
@@ -12,13 +12,13 @@ class ClubsListScreen extends StatefulWidget {
 }
 
 class _ClubsListScreenState extends State<ClubsListScreen> {
-  TournamentsBloc tournamentsBloc;
+  ClubsBloc clubsBloc;
 
   @override
   void initState() {
     super.initState();
-    tournamentsBloc = BlocProvider.of<TournamentsBloc>(context);
-    tournamentsBloc.add(FetchTournamentsEvent());
+    clubsBloc = BlocProvider.of<ClubsBloc>(context);
+    clubsBloc.add(FetchClubsEvent());
   }
 
   @override
@@ -35,7 +35,7 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
               //     IconButton(
               //       icon: Icon(Icons.refresh),
               //       onPressed: () {
-              //         tournamentsBloc.add(FetchTournamentsEvent());
+              //         clubsBloc.add(FetchClubsEvent());
               //       },
               //     ),
               //     IconButton(
@@ -46,9 +46,9 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
               //   ],
               // ),
               body: Container(
-                child: BlocListener<TournamentsBloc, TournamentsState>(
+                child: BlocListener<ClubsBloc, ClubsState>(
                   listener: (context, state) {
-                    if (state is TournamentsErrorState) {
+                    if (state is ClubsErrorState) {
                       Scaffold.of(context).showSnackBar(
                         SnackBar(
                           content: Text(state.message),
@@ -56,15 +56,15 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
                       );
                     }
                   },
-                  child: BlocBuilder<TournamentsBloc, TournamentsState>(
+                  child: BlocBuilder<ClubsBloc, ClubsState>(
                     builder: (context, state) {
-                      if (state is TournamentsInitialState) {
+                      if (state is ClubsInitialState) {
                         return buildLoading();
-                      } else if (state is TournamentsLoadingState) {
+                      } else if (state is ClubsLoadingState) {
                         return buildLoading();
-                      } else if (state is TournamentsLoadedState) {
-                        return buildArticleList(state.tournaments);
-                      } else if (state is TournamentsErrorState) {
+                      } else if (state is ClubsLoadedState) {
+                        return buildArticleList(state.clubs);
+                      } else if (state is ClubsErrorState) {
                         return buildErrorUi(state.message);
                       }
                     },
@@ -96,9 +96,9 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
     );
   }
 
-  Widget buildArticleList(List<Tournaments> tournaments) {
+  Widget buildArticleList(List<Clubs> clubs) {
     return ListView.builder(
-      itemCount: tournaments.length,
+      itemCount: clubs.length,
       itemBuilder: (ctx, pos) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -108,8 +108,8 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
                 // child: Hero(
                 // ),
               ),
-              title: Text(tournaments[pos].name),
-              subtitle: Text(tournaments[pos].role),
+              title: Text(clubs[pos].name),
+              subtitle: Text(clubs[pos].role),
             ),
             onTap: () {
             },
@@ -119,7 +119,7 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
     );
   }
 
-  // void navigateToArticleDetailPage(BuildContext context, Tournaments tournaments) {
+  // void navigateToArticleDetailPage(BuildContext context, Clubs clubs) {
   //   Navigator.push(context, MaterialPageRoute(builder: (context) {
   //     return ArticleDetailPage(
   //       article: article,

@@ -1,8 +1,8 @@
 import 'package:bloc_login/home/screens/addgame/addgame.dart';
-import 'package:bloc_login/repository/tournaments_repository.dart';
+import 'package:bloc_login/repository/clubs_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc_login/bloc/tournaments/tournaments_bloc.dart';
+import 'package:bloc_login/bloc/clubs/clubs_bloc.dart';
 
 
 class ClubsScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class ClubsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
-        create: (BuildContext context) => TournamentsBloc(repository: TournamentsRepository()),
+        create: (BuildContext context) => ClubsBloc(repository: ClubsRepository()),
         child: ClubsListScreen(),
       ),
     );
