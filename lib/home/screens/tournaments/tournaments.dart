@@ -1,5 +1,6 @@
 import 'package:bloc_login/home/screens/clubs/clubs.dart';
 import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
+import 'package:bloc_login/home/screens/filter/filter_page.dart';
 import 'package:bloc_login/repository/tournaments_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_login/bloc/tournaments/tournaments_bloc.dart';
@@ -120,6 +121,7 @@ class _TournamentsListScreenState extends State<TournamentsListScreen> {
               subtitle: Text(tournaments[pos].start),
             ),
             onTap: () {
+              navigateToArticleDetailPage(context, tournaments[pos].id);
             },
           ),
         );
@@ -127,7 +129,13 @@ class _TournamentsListScreenState extends State<TournamentsListScreen> {
     );
   }
 
-
+  void navigateToArticleDetailPage(BuildContext context, int tournament) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => FilterScreen(tournament: tournament)),
+    );
+  }
 
 // void navigateToArticleDetailPage(BuildContext context, Clubs clubs) {
 //   Navigator.push(context, MaterialPageRoute(builder: (context) {

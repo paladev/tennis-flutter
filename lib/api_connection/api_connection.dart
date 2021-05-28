@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:bloc_login/model/filter.dart';
 import 'package:bloc_login/model/tournaments.dart';
 import 'package:http/http.dart' as http;
 import 'package:bloc_login/model/api_model.dart';
@@ -43,6 +44,22 @@ class TournamentsResultModel {
   }
 }
 
+class PlayersResultModel {
+  // String status;
+  // int totalResults;
+  List<FilterPlayers> players;
+
+  PlayersResultModel({this.players});
+
+  PlayersResultModel.fromJson(Map<String, dynamic> json) {
+    if (json['items'] != null) {
+      players = new List<FilterPlayers>();
+      json['items'].forEach((v) {
+        players.add(new FilterPlayers.fromJson(v));
+      });
+    }
+  }
+}
 Future<Token> getToken(UserLogin userLogin) async {
   final _tokenEndpoint = "/player/login";
   final _tokenURL = _base + _tokenEndpoint;
@@ -98,6 +115,28 @@ Future<List<Tournaments>> fetchTournaments(int id) async {
     // print(parsed[0]['name'].toString());
     List<Tournaments> tournaments = TournamentsResultModel.fromJson(parsed).tournaments;
     return tournaments;
+  } else {
+    // print(json.decode(response.body).toString());
+    throw Exception(json.decode(response.body));
+  }
+}
+
+
+Future<List<FilterPlayers>> fetchPlayers(int id) async {
+  final _clubsUrl = _base + "/tournament/" + "$id" + "/participants";
+  final http.Response response = await http.get(
+    _clubsUrl,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    print(json.decode(response.body).toString());
+    var parsed = json.decode(response.body);
+    // print(parsed[0]['name'].toString());
+    List<FilterPlayers> players = PlayersResultModel.fromJson(parsed).players;
+    print(players);
+    return players;
   } else {
     // print(json.decode(response.body).toString());
     throw Exception(json.decode(response.body));
