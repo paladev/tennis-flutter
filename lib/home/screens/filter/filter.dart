@@ -3,7 +3,9 @@ import 'package:bloc_login/home/custom-widget-tabs.widget.dart';
 import 'package:bloc_login/home/home.dart';
 import 'package:bloc_login/home/screens.dart';
 import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
-import 'package:bloc_login/home/screens/filter/filter_search.dart';
+import 'package:bloc_login/home/screens/filter/filter_buttons.dart';
+import 'package:bloc_login/home/screens/filter/filter_first.dart';
+import 'package:bloc_login/home/screens/filter/filter_second.dart';
 import 'package:bloc_login/login/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_login/bloc/filter/filter_bloc.dart';
@@ -24,7 +26,17 @@ class FilterPlayersScreen extends StatefulWidget {
 
 class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
   FilterBloc filterBloc;
-
+  String _type;
+  String _playerOne;
+  String _playerTwo;
+  List<IconData> imagePath = [
+    Icons.bluetooth,
+    Icons.wifi,
+    Icons.flash_on,
+    Icons.flash_on,
+    Icons.flash_on,
+    Icons.flash_on
+  ];
   @override
   void initState() {
     super.initState();
@@ -41,8 +53,11 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
           return Material(
             child: Scaffold(
               appBar: AppBar(
-                title: const Text('Фильтр'),
-                leading: IconButton(icon:Icon(Icons.chevron_left),onPressed:() => Navigator.push(context, MaterialPageRoute(builder: (context) {
+                title: const Text('Фильтр', style: TextStyle(
+                    color: Colors.black
+                ),),
+                backgroundColor: Colors.white,
+                leading: IconButton(icon:Icon(Icons.chevron_left, color: Colors.black,),onPressed:() => Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return HomePage();
                 }),
                 ),),
@@ -118,7 +133,70 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
   Widget buildArticleList(List<FilterPlayers> players) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-          child: FormExample(),
+          child: ListView(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text('Фильтр', textAlign: TextAlign.left, style: TextStyle(
+                      color: Color.fromRGBO(46, 56, 77, 1),
+                      fontFamily: 'Inter',
+                      fontSize: 36,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.w600,
+                      height: 1.5 /*PERCENT not supported*/
+                  ),),
+                ),
+              ),
+              Container(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text('Выберите первого участника', textAlign: TextAlign.left, style: TextStyle(
+                      color: Color.fromRGBO(46, 56, 77, 1),
+                      fontFamily: 'Inter',
+                      fontSize: 15,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.normal,
+                      height: 1.5 /*PERCENT not supported*/
+                  ),),
+                ),
+              ),
+
+              Container( child: ToggleButtonsExample(
+              ),),
+
+              FilterFirst(
+              players: players,
+              onChangedSelect: (player){
+                _playerOne = player;
+
+              }),
+              FilterSecond(
+                  players: players,
+                  onChangedSelect: (player){
+                    _playerTwo = player;
+                  }),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0,right: 20.0),
+                child: SizedBox(
+                    width:double.infinity - 20.0,//width of button equal to parent widget
+                    height: 50,
+                    child:ElevatedButton(
+                      child: Text('Поиск'),
+                      onPressed: () {
+                        print(_playerOne);
+                        print(_playerTwo);
+                      },
+                    )),
+              ),
+
+
+
+            ],
+
+          )
     );
 
 

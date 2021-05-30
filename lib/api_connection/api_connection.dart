@@ -135,7 +135,6 @@ Future<List<FilterPlayers>> fetchPlayers(int id) async {
     var parsed = json.decode(response.body);
     // print(parsed[0]['name'].toString());
     List<FilterPlayers> players = PlayersResultModel.fromJson(parsed).players;
-    print(players);
     return players;
   } else {
     // print(json.decode(response.body).toString());
