@@ -38,6 +38,15 @@ class Info{
 }
 
 
+// factory Info.fromJson(Map<String, dynamic> json) {
+//   return Token(
+//       uid: json['uid'],
+//       token: json['token']
+//   );
+// }a
+
+
+
 
 
 // class Uid{

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:customtogglebuttons/customtogglebuttons.dart';
 class ToggleButtonsExample extends StatefulWidget {
+  final ValueChanged<int> onChangedSelect;
+  ToggleButtonsExample({Key key, this.onChangedSelect}) : super(key: key);
 
   @override
-
   ToggleButtonsExampleState createState() => new ToggleButtonsExampleState();
 
 }
@@ -36,6 +37,7 @@ class ToggleButtonsExampleState extends State<ToggleButtonsExample> {
                           for( var i = 0 ; i < _flagGroup.length; i++ ) {
                             _flagGroup[i] = true;
                           }
+                          widget.onChangedSelect(1);
                           setState(() => _flagGroup[0] = !_flagGroup[0]);
                         },
                         child: Icon(
@@ -68,6 +70,7 @@ class ToggleButtonsExampleState extends State<ToggleButtonsExample> {
                           for( var i = 0 ; i < _flagGroup.length; i++ ) {
                             _flagGroup[i] = true;
                           }
+                          widget.onChangedSelect(3);
                           setState(() => _flagGroup[1] = !_flagGroup[1]);
                         },
                         child: Icon(
@@ -101,6 +104,7 @@ class ToggleButtonsExampleState extends State<ToggleButtonsExample> {
                           for( var i = 0 ; i < _flagGroup.length; i++ ) {
                             _flagGroup[i] = true;
                           }
+                          widget.onChangedSelect(5);
                           setState(() => _flagGroup[2] = !_flagGroup[2]);
                         },
                         child: Icon(
@@ -141,6 +145,7 @@ class ToggleButtonsExampleState extends State<ToggleButtonsExample> {
                           for( var i = 0 ; i < _flagGroup.length; i++ ) {
                             _flagGroup[i] = true;
                           }
+                          widget.onChangedSelect(2);
                           setState(() => _flagGroup[3] = !_flagGroup[3]);
                         },
                         child: Icon(
@@ -173,6 +178,7 @@ class ToggleButtonsExampleState extends State<ToggleButtonsExample> {
                           for( var i = 0 ; i < _flagGroup.length; i++ ) {
                             _flagGroup[i] = true;
                           }
+                          widget.onChangedSelect(4);
                           setState(() => _flagGroup[4] = !_flagGroup[4]);
                         },
                         child: Icon(
@@ -206,6 +212,7 @@ class ToggleButtonsExampleState extends State<ToggleButtonsExample> {
                           for( var i = 0 ; i < _flagGroup.length; i++ ) {
                             _flagGroup[i] = true;
                           }
+                          widget.onChangedSelect(0);
                           setState(() => _flagGroup[5] = !_flagGroup[5]);
                         },
                         child: Icon(

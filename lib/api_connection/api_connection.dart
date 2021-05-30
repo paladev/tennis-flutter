@@ -2,8 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:bloc_login/model/filter.dart';
 import 'package:bloc_login/model/tournaments.dart';
+import 'package:bloc_login/repository/games_repository.dart';
+import 'package:bloc_login/repository/tournaments_repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:bloc_login/model/api_model.dart';
+import 'package:bloc_login/model/games_model.dart';
 import 'package:bloc_login/model/clubs.dart';
 import 'dart:developer';
 
@@ -60,6 +63,22 @@ class PlayersResultModel {
     }
   }
 }
+class GamesResultModel {
+
+  List<Games> games;
+
+  GamesResultModel({this.games});
+
+  GamesResultModel.fromJson(Map<String, dynamic> json) {
+    if (json['items'] != null) {
+      games = new List<Games>();
+      json['items'].forEach((v) {
+        games.add(new Games.fromJson(v));
+      });
+    }
+  }
+}
+
 Future<Token> getToken(UserLogin userLogin) async {
   final _tokenEndpoint = "/player/login";
   final _tokenURL = _base + _tokenEndpoint;
@@ -136,6 +155,26 @@ Future<List<FilterPlayers>> fetchPlayers(int id) async {
     // print(parsed[0]['name'].toString());
     List<FilterPlayers> players = PlayersResultModel.fromJson(parsed).players;
     return players;
+  } else {
+    // print(json.decode(response.body).toString());
+    throw Exception(json.decode(response.body));
+  }
+}
+
+Future<List<Games>> fetchGames(GamesRepository data) async {
+  final _clubsUrl = _base + "/club/" + "$data.type" + "/tournaments";
+  final http.Response response = await http.get(
+    _clubsUrl,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    print(json.decode(response.body).toString());
+    var parsed = json.decode(response.body);
+    // print(parsed[0]['name'].toString());
+    List<Games> games = GamesResultModel.fromJson(parsed).games;
+    return games;
   } else {
     // print(json.decode(response.body).toString());
     throw Exception(json.decode(response.body));

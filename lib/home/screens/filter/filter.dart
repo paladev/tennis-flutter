@@ -6,6 +6,8 @@ import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
 import 'package:bloc_login/home/screens/filter/filter_buttons.dart';
 import 'package:bloc_login/home/screens/filter/filter_first.dart';
 import 'package:bloc_login/home/screens/filter/filter_second.dart';
+import 'package:bloc_login/home/screens/tournaments/tournaments.dart';
+import 'package:bloc_login/home/screens/tournaments/tournaments_page.dart';
 import 'package:bloc_login/login/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_login/bloc/filter/filter_bloc.dart';
@@ -26,9 +28,9 @@ class FilterPlayersScreen extends StatefulWidget {
 
 class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
   FilterBloc filterBloc;
-  String _type;
   String _playerOne;
   String _playerTwo;
+  int _type;
   List<IconData> imagePath = [
     Icons.bluetooth,
     Icons.wifi,
@@ -57,10 +59,12 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
                     color: Colors.black
                 ),),
                 backgroundColor: Colors.white,
-                leading: IconButton(icon:Icon(Icons.chevron_left, color: Colors.black,),onPressed:() => Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return HomePage();
-                }),
-                ),),
+                leading: IconButton(icon:Icon(Icons.chevron_left, color: Colors.black,),onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ClubsScreen()),
+                  );
+                },),
               ),
 
               // appBar: AppBar(
@@ -164,8 +168,12 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
                 ),
               ),
 
-              Container( child: ToggleButtonsExample(
-              ),),
+              Container(
+                child: ToggleButtonsExample(
+                    onChangedSelect: (player){
+                      _type = player;
+                    }),
+              ),
 
               FilterFirst(
               players: players,
@@ -186,6 +194,7 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
                     child:ElevatedButton(
                       child: Text('Поиск'),
                       onPressed: () {
+                        print(_type);
                         print(_playerOne);
                         print(_playerTwo);
                       },

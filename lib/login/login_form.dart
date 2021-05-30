@@ -32,52 +32,65 @@ class _LoginFormState extends State<LoginForm> {
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           return Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("./lib/images/Image.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
             child: Form(
               child: Padding(
-                padding: EdgeInsets.all(40.0),
+                padding: EdgeInsets.all(20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'username', icon: Icon(Icons.person)),
-                      controller: _usernameController,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          labelText: 'password', icon: Icon(Icons.security)),
-                      controller: _passwordController,
-                      obscureText: true,
-                    ),
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.85,
-                      height: MediaQuery.of(context).size.width * 0.22,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 30.0),
-                        child: RaisedButton(
-                          onPressed: state is! LoginLoading
-                              ? _onLoginButtonPressed
-                              : null,
-                          child: Text(
-                            'Login',
-                            style: TextStyle(
-                              fontSize: 24.0,
+                      width: MediaQuery.of(context).size.width ,
+                      height: MediaQuery.of(context).size.width ,
+                      padding: const EdgeInsets.all(20.0),
+                      color: Colors.white,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          TextFormField(
+                            decoration: InputDecoration(
+                                labelText: 'Логин', border: OutlineInputBorder()),
+                            controller: _usernameController,
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(top: 30.0),
+                          child:TextFormField(
+                            decoration: InputDecoration(
+                                labelText: 'Пароль', border: OutlineInputBorder()),
+                            controller: _passwordController,
+                            obscureText: true,
+                          ),),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            height: MediaQuery.of(context).size.width * 0.20,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 30.0),
+                              child: ElevatedButton(
+                                onPressed: state is! LoginLoading
+                                    ? _onLoginButtonPressed
+                                    : null,
+                                child: Text(
+                                  'Войти',
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                          shape: StadiumBorder(
-                            side: BorderSide(
-                              color: Colors.black,
-                              width: 2,
-                            ),
+                          Container(
+                            child: state is LoginLoading
+                                ? CircularProgressIndicator()
+                                : null,
                           ),
-                        ),
+                        ],
                       ),
-                    ),
-                    Container(
-                      child: state is LoginLoading
-                          ? CircularProgressIndicator()
-                          : null,
                     ),
                   ],
                 ),

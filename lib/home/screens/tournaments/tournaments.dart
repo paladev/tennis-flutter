@@ -75,7 +75,7 @@ class _TournamentsListScreenState extends State<TournamentsListScreen> {
                       } else if (state is TournamentsLoadingState) {
                         return buildLoading();
                       } else if (state is TournamentsLoadedState) {
-                        return buildArticleList(state.tournaments);
+                        return buildArticleList(context, state.tournaments);
                       } else if (state is TournamentsErrorState) {
                         return buildErrorUi(state.message);
                       }
@@ -108,7 +108,7 @@ class _TournamentsListScreenState extends State<TournamentsListScreen> {
     );
   }
 
-  Widget buildArticleList(List<Tournaments> tournaments) {
+  Widget buildArticleList(BuildContext context, List<Tournaments> tournaments) {
     return Column(
         children: <Widget>[
           Container(
