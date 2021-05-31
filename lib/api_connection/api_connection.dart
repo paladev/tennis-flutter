@@ -6,7 +6,7 @@ import 'package:bloc_login/repository/games_repository.dart';
 import 'package:bloc_login/repository/tournaments_repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:bloc_login/model/api_model.dart';
-import 'package:bloc_login/model/games_model.dart';
+import 'package:bloc_login/model/games.dart';
 import 'package:bloc_login/model/clubs.dart';
 import 'dart:developer';
 
@@ -162,12 +162,16 @@ Future<List<FilterPlayers>> fetchPlayers(int id) async {
 }
 
 Future<List<Games>> fetchGames(GamesRepository data) async {
-  final _clubsUrl = _base + "/club/" + "$data.type" + "/tournaments";
-  final http.Response response = await http.get(
+  final tid = data.tournament;
+  final _clubsUrl = _base + "/tournament/" + "$tid" + "/participants/games";
+  print(_clubsUrl);
+  final http.Response response = await http.post(
     _clubsUrl,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
+    body: jsonEncode(data.toDatabaseJson()),
+
   );
   if (response.statusCode == 200) {
     print(json.decode(response.body).toString());
@@ -176,7 +180,7 @@ Future<List<Games>> fetchGames(GamesRepository data) async {
     List<Games> games = GamesResultModel.fromJson(parsed).games;
     return games;
   } else {
-    // print(json.decode(response.body).toString());
+    print(json.decode(response.body).toString());
     throw Exception(json.decode(response.body));
   }
 }

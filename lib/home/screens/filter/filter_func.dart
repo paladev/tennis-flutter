@@ -26,11 +26,13 @@ class FilterPlayer {
       return matches;
     }
   }
-  // static List<String> getSuggestions(List<FilterPlayers> players,String query) {
-  //   List<String> matches = <String>[];
-  //   matches.addAll(cities);
-  //
-  //   matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
-  //   return matches;
-  // }
+  static int getSuggestionsId(List<FilterPlayers> players,String name) {
+    FilterPlayers matchingName;
+      List<String> matches = <String>[];
+    for( var i = 0 ; i < players.length; i++ ) {
+      if (players[i].name == name){
+        return players[i].id;
+      }
+    }
+  }
 }

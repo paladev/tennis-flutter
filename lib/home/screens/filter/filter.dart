@@ -6,6 +6,7 @@ import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
 import 'package:bloc_login/home/screens/filter/filter_buttons.dart';
 import 'package:bloc_login/home/screens/filter/filter_first.dart';
 import 'package:bloc_login/home/screens/filter/filter_second.dart';
+import 'package:bloc_login/home/screens/games/games_page.dart';
 import 'package:bloc_login/home/screens/tournaments/tournaments.dart';
 import 'package:bloc_login/home/screens/tournaments/tournaments_page.dart';
 import 'package:bloc_login/login/login_form.dart';
@@ -22,28 +23,24 @@ import 'package:bloc_login/login/login_page.dart';
 
 
 class FilterPlayersScreen extends StatefulWidget {
+  int tournament;
+  FilterPlayersScreen({this.tournament});
   @override
   _FilterPlayersScreenState createState() => _FilterPlayersScreenState();
 }
 
 class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
   FilterBloc filterBloc;
-  String _playerOne;
-  String _playerTwo;
+  int _playerOne;
+  int _playerTwo;
   int _type;
-  List<IconData> imagePath = [
-    Icons.bluetooth,
-    Icons.wifi,
-    Icons.flash_on,
-    Icons.flash_on,
-    Icons.flash_on,
-    Icons.flash_on
-  ];
+  int _tournaments;
   @override
   void initState() {
     super.initState();
     filterBloc = BlocProvider.of<FilterBloc>(context);
     filterBloc.add(FetchFilterEvent());
+    _tournaments = widget.tournament;
   }
 
   @override
@@ -137,7 +134,7 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
   Widget buildArticleList(List<FilterPlayers> players) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-          child: ListView(
+          child: Column(
             children: <Widget>[
               Container(
                 alignment: Alignment.topLeft,
@@ -174,13 +171,12 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
                       _type = player;
                     }),
               ),
-
               FilterFirst(
-              players: players,
-              onChangedSelect: (player){
-                _playerOne = player;
+                  players: players,
+                  onChangedSelect: (player){
+                    _playerOne = player;
 
-              }),
+                  }),
               FilterSecond(
                   players: players,
                   onChangedSelect: (player){
@@ -194,9 +190,8 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
                     child:ElevatedButton(
                       child: Text('Поиск'),
                       onPressed: () {
-                        print(_type);
-                        print(_playerOne);
-                        print(_playerTwo);
+                        print("TYT " +"$_tournaments");
+                        navigateToArticleDetailPage(context, _tournaments,_type,_playerOne,_playerTwo);
                       },
                     )),
               ),
@@ -228,8 +223,16 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
   //   );
   // }
 }
-// void navigateToArticleDetailPage(BuildContext context, int club) {
-//   Navigator.push(
-//     context,
-//     MaterialPageRoute(builder: (context) => TournamentsScreen(club: club)),
-//   );
+void navigateToArticleDetailPage(BuildContext context, int tid, int type, int first, int second) {
+  print("tournament" + "$tid");
+  print(tid);
+  print(tid);
+  print(tid);
+  print(tid);
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+        builder: (context) => GamesScreen(tournament: tid, type: type, playerOne: first, playerTwo: second,)),
+  );
+}

@@ -10,8 +10,8 @@ class FilterRepository {
   FilterRepository({this.id});
 
   Future<List<FilterPlayers>> getFilter () async {
-    List<FilterPlayers> plyers = await fetchPlayers(id);
-    return plyers;
+    List<FilterPlayers> players = await fetchPlayers(id);
+    return players;
   }
 
 }

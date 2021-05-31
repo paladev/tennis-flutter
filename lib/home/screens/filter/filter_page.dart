@@ -13,7 +13,7 @@ class FilterScreen extends StatelessWidget {
     return MaterialApp(
       home: BlocProvider(
         create: (BuildContext context) => FilterBloc(repository: FilterRepository(id: tournament)),
-        child: FilterPlayersScreen(),
+        child: FilterPlayersScreen(tournament: tournament),
       ),
     );
   }

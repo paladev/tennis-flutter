@@ -6,7 +6,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class FilterSecond extends StatefulWidget {
   List<FilterPlayers> players;
-  final ValueChanged<String> onChangedSelect;
+  final ValueChanged<int> onChangedSelect;
   FilterSecond({Key key,this.players, this.onChangedSelect}) : super(key: key);
   @override
   _FilterSecondState createState() => _FilterSecondState();
@@ -42,7 +42,7 @@ class _FilterSecondState extends State<FilterSecond> {
               },
               onSuggestionSelected: (String suggestion) {
                 this._typeAheadController.text = suggestion;
-                widget.onChangedSelect(suggestion);
+                widget.onChangedSelect(FilterPlayer.getSuggestionsId(widget.players, suggestion));
               },
               // onChanged: (value) => widget.player(value),
               // validator: (value) =>

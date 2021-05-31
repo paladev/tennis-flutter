@@ -1,13 +1,13 @@
 import 'package:bloc_login/home/screens/clubs/clubs.dart';
 import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
 import 'package:bloc_login/home/screens/filter/filter_page.dart';
-import 'package:bloc_login/repository/tournaments_repository.dart';
+import 'package:bloc_login/repository/games_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:bloc_login/bloc/tournaments/tournaments_bloc.dart';
-import 'package:bloc_login/bloc/tournaments/tournaments_event.dart';
-import 'package:bloc_login/bloc/tournaments/tournaments_state.dart';
+import 'package:bloc_login/bloc/games/games_bloc.dart';
+import 'package:bloc_login/bloc/games/games_event.dart';
+import 'package:bloc_login/bloc/games/games_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc_login/model/tournaments.dart';
+import 'package:bloc_login/model/games.dart';
 
 class GamesListScreen extends StatefulWidget {
   @override
@@ -62,9 +62,9 @@ class _GamesListScreenState extends State<GamesListScreen> {
               //   ],
               // ),
               body: Container(
-                child: BlocListener<TournamentsBloc, TournamentsState>(
+                child: BlocListener<GamesBloc, GamesState>(
                   listener: (context, state) {
-                    if (state is TournamentsErrorState) {
+                    if (state is GamesErrorState) {
                       Scaffold.of(context).showSnackBar(
                         SnackBar(
                           content: Text(state.message),
@@ -72,15 +72,15 @@ class _GamesListScreenState extends State<GamesListScreen> {
                       );
                     }
                   },
-                  child: BlocBuilder<TournamentsBloc, TournamentsState>(
+                  child: BlocBuilder<GamesBloc, GamesState>(
                     builder: (context, state) {
-                      if (state is TournamentsInitialState) {
+                      if (state is GamesInitialState) {
                         return buildLoading();
-                      } else if (state is TournamentsLoadingState) {
+                      } else if (state is GamesLoadingState) {
                         return buildLoading();
-                      } else if (state is TournamentsLoadedState) {
-                        return buildArticleList(context, state.tournaments);
-                      } else if (state is TournamentsErrorState) {
+                      } else if (state is GamesLoadedState) {
+                        return buildArticleList(context, state.games);
+                      } else if (state is GamesErrorState) {
                         return buildErrorUi(state.message);
                       }
                     },
@@ -112,7 +112,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
     );
   }
 
-  Widget buildArticleList(BuildContext context, List<Tournaments> tournaments) {
+  Widget buildArticleList(BuildContext context, List<Games> games) {
     return Column(
       children: <Widget>[
         Container(
@@ -137,7 +137,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: tournaments.length,
+                itemCount: games.length,
                 itemBuilder: (ctx, pos) {
                   return Padding(
                     padding: const EdgeInsets.only(
@@ -150,7 +150,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Text(
-                              tournaments[pos].start, textAlign: TextAlign.left,
+                              games[pos].planed_date, textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Color.fromRGBO(46, 56, 77, 1),
                                   fontFamily: 'Inter',
@@ -160,7 +160,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
                                   height: 1.5 /*PERCENT not supported*/
                               ),),
                             Text(
-                              tournaments[pos].name, textAlign: TextAlign.left,
+                              games[pos].player1Name, textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Color.fromRGBO(46, 56, 77, 1),
                                   fontFamily: 'Inter',
@@ -227,8 +227,8 @@ class _GamesListScreenState extends State<GamesListScreen> {
                         ),
                       ),
                       onTap: () {
-                        navigateToArticleDetailPage(context, tournaments[pos]
-                            .id);
+                        // navigateToArticleDetailPage(context, games[pos]
+                        //     .id);
                       },
                     ),
                   );
