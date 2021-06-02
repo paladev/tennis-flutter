@@ -44,28 +44,9 @@ class _FilterSecondState extends State<FilterSecond> {
                 this._typeAheadController.text = suggestion;
                 widget.onChangedSelect(FilterPlayer.getSuggestionsId(widget.players, suggestion));
               },
-              // onChanged: (value) => widget.player(value),
-              // validator: (value) =>
-              // value.isEmpty ? 'Please select a city' : null,
-              // onSaved: (value) => widget.player(value),
+
             ),
-            // SizedBox(
-            //   height: 10.0,
-            // ),
-            // RaisedButton(
-            //   child: Text('Submit'),
-            //   onPressed: () {
-            //     if (this._formKey.currentState.validate()) {
-            //       this._formKey.currentState.save();
-            //       Scaffold.of(context).showSnackBar(
-            //         SnackBar(
-            //           content:
-            //           Text('Your Favorite City is ${this._selectedCity}'),
-            //         ),
-            //       );
-            //     }
-            //   },
-            // )
+
           ],
         ),
       ),

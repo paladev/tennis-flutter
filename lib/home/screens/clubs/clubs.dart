@@ -217,11 +217,7 @@ class _ClubsListScreenState extends State<ClubsListScreen> {
                 },
               ),),
           ),
-
         ),
-
-
-
       ],
     );
 

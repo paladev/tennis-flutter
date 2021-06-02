@@ -21,7 +21,7 @@ class ScoreBloc extends Bloc<ScoreEvent, ScoreState> {
     if (event is FetchScoreEvent) {
       yield ScoreLoadingState();
       try {
-        List<Score> score = await repository.getClubs();
+        ScoreRoundFull score = await repository.getClubs();
         yield ScoreLoadedState(score: score);
       } catch (e) {
         yield ScoreErrorState(message: e.toString());

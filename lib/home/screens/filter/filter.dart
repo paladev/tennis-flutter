@@ -209,26 +209,7 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
 
           )
     );
-
-
   }
-
-  // Widget AutocompleteBasicUserExample(List<FilterPlayers> players) {
-  //   return Autocomplete<FilterPlayers>(
-  //     displayStringForOption: (FilterPlayers option) => option.name,
-  //     optionsBuilder: (TextEditingValue textEditingValue) {
-  //       if (textEditingValue.text == '') {
-  //         return const Iterable<FilterPlayers>.empty();
-  //       }
-  //       return players.where((FilterPlayers option) {
-  //         return option.toString().contains(textEditingValue.text.toLowerCase());
-  //       });
-  //     },
-  //     // onSelected: (FilterPlayers selection) {
-  //     //   print('You just selected ${_displayStringForOption(selection)}');
-  //     // },
-  //   );
-  // }
 }
 void navigateToArticleDetailPage(BuildContext context, int tid, int type, P1 first, P1 second) {
   var data = gtype(

@@ -1,12 +1,14 @@
 class Games{
+  int gid;
   String player1Name;
   String player2Name;
   int roundName;
   String planed_date;
-  Games({this.player1Name ,this.player2Name, this.roundName, this.planed_date});
+  Games({this.gid, this.player1Name ,this.player2Name, this.roundName, this.planed_date});
 
   factory Games.fromJson(Map<String, dynamic> json) {
     return Games(
+      gid: json['id'] as int,
       player1Name: json['participant1Name'] as String,
       player2Name: json['participant2Name'] as String,
       roundName: json['type'] as int,

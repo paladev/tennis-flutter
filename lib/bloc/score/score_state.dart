@@ -1,6 +1,6 @@
+import 'package:bloc_login/model/score_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:bloc_login/model/games.dart';
 
 abstract class ScoreState extends Equatable {}
 
@@ -17,7 +17,7 @@ class ScoreLoadingState extends ScoreState {
 
 class ScoreLoadedState extends ScoreState {
 
-  List<Games> score;
+  ScoreRoundFull score;
 
   ScoreLoadedState({@required this.score});
 

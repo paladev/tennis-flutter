@@ -1,6 +1,7 @@
 import 'package:bloc_login/home/screens/clubs/clubs.dart';
 import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
 import 'package:bloc_login/home/screens/filter/filter_page.dart';
+import 'package:bloc_login/home/screens/score/score_page.dart';
 import 'package:bloc_login/repository/games_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_login/bloc/games/games_bloc.dart';
@@ -48,22 +49,6 @@ class _GamesListScreenState extends State<GamesListScreen> {
                       }),
                       ),),
               ),
-              // appBar: AppBar(
-              //   title: Text("Cricket"),
-              //   actions: <Widget>[
-              //     IconButton(
-              //       icon: Icon(Icons.refresh),
-              //       onPressed: () {
-              //         clubsBloc.add(FetchClubsEvent());
-              //       },
-              //     ),
-              //     IconButton(
-              //       icon: Icon(Icons.info),
-              //       onPressed: () {
-              //       },
-              //     )
-              //   ],
-              // ),
               body: Container(
                 child: BlocListener<GamesBloc, GamesState>(
                   listener: (context, state) {
@@ -162,16 +147,16 @@ class _GamesListScreenState extends State<GamesListScreen> {
                                   fontWeight: FontWeight.normal,
                                   height: 1.5 /*PERCENT not supported*/
                               ),),
-                            Text(
-                              games[pos].player1Name, textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Color.fromRGBO(46, 56, 77, 1),
-                                  fontFamily: 'Inter',
-                                  fontSize: 20,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.normal,
-                                  height: 1
-                              ),),
+                            // Text(
+                            //   games[pos].player1Name, textAlign: TextAlign.left,
+                            //   style: TextStyle(
+                            //       color: Color.fromRGBO(46, 56, 77, 1),
+                            //       fontFamily: 'Inter',
+                            //       fontSize: 20,
+                            //       letterSpacing: 0,
+                            //       fontWeight: FontWeight.normal,
+                            //       height: 1
+                            //   ),),
                             Padding(
                               padding: const EdgeInsets.only(top: 31.0),
                             ),
@@ -230,8 +215,8 @@ class _GamesListScreenState extends State<GamesListScreen> {
                         ),
                       ),
                       onTap: () {
-                        // navigateToArticleDetailPage(context, games[pos]
-                        //     .id);
+                        navigateToArticleDetailPage(context, games[pos]
+                            .gid);
                       },
                     ),
                   );
@@ -245,35 +230,12 @@ class _GamesListScreenState extends State<GamesListScreen> {
       ],
     );
   }
-// Widget buildArticleList(List<Tournaments> tournaments) {
-//   return ListView.builder(
-//     itemCount: tournaments.length,
-//     itemBuilder: (ctx, pos) {
-//       return Padding(
-//         padding: const EdgeInsets.all(8.0),
-//         child: InkWell(
-//           child: ListTile(
-//             leading: ClipOval(
-//               // child: Hero(
-//               // ),
-//             ),
-//             title: Text(tournaments[pos].name),
-//             subtitle: Text(tournaments[pos].start),
-//           ),
-//           onTap: () {
-//             navigateToArticleDetailPage(context, tournaments[pos].id);
-//           },
-//         ),
-//       );
-//     },
-//   );
-// }
 }
-  void navigateToArticleDetailPage(BuildContext context, int tournament) {
+  void navigateToArticleDetailPage(BuildContext context, int gid) {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => FilterScreen(tournament: tournament)),
+          builder: (context) => ScoreScreen(id: gid)),
     );
   }
 

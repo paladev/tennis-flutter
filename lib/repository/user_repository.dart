@@ -43,6 +43,4 @@ class UserRepository {
     bool result = await userDao.checkUser(0);
     return result;
   }
-
-
 }
