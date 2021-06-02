@@ -26,12 +26,12 @@ class FilterPlayer {
       return matches;
     }
   }
-  static int getSuggestionsId(List<FilterPlayers> players,String name) {
+  static FilterPlayers getSuggestionsId(List<FilterPlayers> players,String name) {
     FilterPlayers matchingName;
       List<String> matches = <String>[];
     for( var i = 0 ; i < players.length; i++ ) {
       if (players[i].name == name){
-        return players[i].id;
+        return players[i];
       }
     }
   }

@@ -10,6 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_login/model/games.dart';
 
 class GamesListScreen extends StatefulWidget {
+  int tid;
+  GamesListScreen({this.tid});
+
   @override
   _GamesListScreenState createState() => _GamesListScreenState();
 }

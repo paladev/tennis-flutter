@@ -6,7 +6,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class FilterSecond extends StatefulWidget {
   List<FilterPlayers> players;
-  final ValueChanged<int> onChangedSelect;
+  final ValueChanged<FilterPlayers> onChangedSelect;
   FilterSecond({Key key,this.players, this.onChangedSelect}) : super(key: key);
   @override
   _FilterSecondState createState() => _FilterSecondState();

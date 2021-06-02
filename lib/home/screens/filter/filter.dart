@@ -16,6 +16,7 @@ import 'package:bloc_login/bloc/filter/filter_event.dart';
 import 'package:bloc_login/bloc/filter/filter_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_login/model/filter.dart';
+import 'package:bloc_login/model/games.dart';
 import 'package:bloc_login/home/screens/filter/filter_page.dart';
 import 'package:bloc_login/home/routes.dart';
 import 'package:bloc_login/repository/filter_repository.dart';
@@ -31,8 +32,8 @@ class FilterPlayersScreen extends StatefulWidget {
 
 class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
   FilterBloc filterBloc;
-  int _playerOne;
-  int _playerTwo;
+  P1 _playerOne;
+  P1 _playerTwo;
   int _type;
   int _tournaments;
   @override
@@ -134,7 +135,7 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
   Widget buildArticleList(List<FilterPlayers> players) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: ListView(
             children: <Widget>[
               Container(
                 alignment: Alignment.topLeft,
@@ -174,13 +175,19 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
               FilterFirst(
                   players: players,
                   onChangedSelect: (player){
-                    _playerOne = player;
+                    _playerOne = P1(
+                      pid: player.id,
+                      type: player.type
+                    );
 
                   }),
               FilterSecond(
                   players: players,
                   onChangedSelect: (player){
-                    _playerTwo = player;
+                    _playerTwo = P1(
+                        pid: player.id,
+                        type: player.type
+                    );
                   }),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0,right: 20.0),
@@ -223,16 +230,15 @@ class _FilterPlayersScreenState extends State<FilterPlayersScreen> {
   //   );
   // }
 }
-void navigateToArticleDetailPage(BuildContext context, int tid, int type, int first, int second) {
-  print("tournament" + "$tid");
-  print(tid);
-  print(tid);
-  print(tid);
-  print(tid);
-
+void navigateToArticleDetailPage(BuildContext context, int tid, int type, P1 first, P1 second) {
+  var data = gtype(
+    rtype: type,
+    p1: first,
+    p2: second
+  );
   Navigator.push(
     context,
     MaterialPageRoute(
-        builder: (context) => GamesScreen(tournament: tid, type: type, playerOne: first, playerTwo: second,)),
+        builder: (context) => GamesScreen(tournament: tid, data: data)),
   );
 }

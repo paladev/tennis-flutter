@@ -79,6 +79,22 @@ class GamesResultModel {
   }
 }
 
+// class ScoreResultModel {
+//
+//   List<Score> score;
+//
+//   ScoreResultModel({this.score});
+//
+//   ScoreResultModel.fromJson(Map<String, dynamic> json) {
+//     if (json['items'] != null) {
+//       score = new List<Score>();
+//       json['items'].forEach((v) {
+//         score.add(new Score.fromJson(v));
+//       });
+//     }
+//   }
+// }
+
 Future<Token> getToken(UserLogin userLogin) async {
   final _tokenEndpoint = "/player/login";
   final _tokenURL = _base + _tokenEndpoint;
@@ -161,8 +177,7 @@ Future<List<FilterPlayers>> fetchPlayers(int id) async {
   }
 }
 
-Future<List<Games>> fetchGames(GamesRepository data) async {
-  final tid = data.tournament;
+Future<List<Games>> fetchGames(int tid, gtype data) async {
   final _clubsUrl = _base + "/tournament/" + "$tid" + "/participants/games";
   print(_clubsUrl);
   final http.Response response = await http.post(
@@ -170,7 +185,7 @@ Future<List<Games>> fetchGames(GamesRepository data) async {
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(data.toDatabaseJson()),
+    body: jsonEncode(data.toJson()),
 
   );
   if (response.statusCode == 200) {
@@ -184,3 +199,24 @@ Future<List<Games>> fetchGames(GamesRepository data) async {
     throw Exception(json.decode(response.body));
   }
 }
+
+
+// Future<List<Score>> fetchScore(int gid) async {
+//   final _clubsUrl = _base + "/game/" + "$gid";
+//   print(_clubsUrl);
+//   final http.Response response = await http.get(
+//     _clubsUrl,
+//     headers: <String, String>{
+//       'Content-Type': 'application/json; charset=UTF-8',
+//     },
+//   );
+//   if (response.statusCode == 200) {
+//     print(json.decode(response.body).toString());
+//     var parsed = json.decode(response.body);
+//     List<Score> score = ScoreResultModel.fromJson(parsed).score;
+//     return score;
+//   } else {
+//     print(json.decode(response.body).toString());
+//     throw Exception(json.decode(response.body));
+//   }
+// }

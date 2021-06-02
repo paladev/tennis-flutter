@@ -8,31 +8,13 @@ import 'package:bloc_login/dao/user_dao.dart';
 
 class GamesRepository {
   int tournament;
-  int first;
-  int second;
-  int type;
-  GamesRepository({this.tournament,this.first,this.second,this.type});
+  gtype data;
+  GamesRepository({this.tournament, this.data});
 
   Future<List<Games>> getClubs () async {
-    GamesRepository data = GamesRepository(
-      tournament: tournament,
-      first: first,
-      second: second,
-      type: type,
-    );
-    print("turnir id " +"data.$tournament");
-    print("first id " +"$data.$first");
-    print("second id " +"$data.second");
-    print("type id " +"$data.$type");
-    List<Games> games = await fetchGames(data);
+    List<Games> games = await fetchGames(tournament, data);
     return games;
   }
-
-  Map <String, dynamic> toDatabaseJson() => {
-    "pid1": this.first,
-    "pid2": this.second,
-    "ptype": this.type,
-  };
 
 }
 
