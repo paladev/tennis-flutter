@@ -3,7 +3,6 @@ import 'package:bloc_login/repository/score_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_login/bloc/score/score_bloc.dart';
-import 'package:bloc_login/model/tournaments.dart';
 
 class ScoreScreen extends StatelessWidget {
   int id;

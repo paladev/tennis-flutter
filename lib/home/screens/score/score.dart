@@ -1,6 +1,8 @@
 import 'package:bloc_login/home/screens/clubs/clubs.dart';
 import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
 import 'package:bloc_login/home/screens/filter/filter_page.dart';
+import 'package:bloc_login/home/screens/score/score_picker.dart';
+import 'package:bloc_login/home/screens/score/set.dart';
 import 'package:bloc_login/model/score_model.dart';
 import 'package:bloc_login/repository/tournaments_repository.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +112,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
   }
 
   Widget buildArticleList(BuildContext context, ScoreRoundFull score) {
-    return Column(
+    return ListView(
       children: <Widget>[
         Container(
           alignment: Alignment.topLeft,
@@ -358,7 +360,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Container(
-                                      child: Text('2', textAlign: TextAlign.left, style: TextStyle(
+                                      child: Text(score.rule.setsToWin.toString(), textAlign: TextAlign.left, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 20,
@@ -368,7 +370,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                       ),)
                                   ),
                                   Container(
-                                      child: Text('6', textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text(score.rule.gamesInSets.toString(), textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 20,
@@ -378,7 +380,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                       ),)
                                   ),
                                   Container(
-                                      child: Text('7', textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text(score.rule.gamesInSets.toString(), textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 20,
@@ -411,16 +413,10 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                               ),
 
                             ),
-                            Container(
-                                child: Text('Сет 1', textAlign: TextAlign.left, style: TextStyle(
-                                    color: Color.fromRGBO(46, 56, 77, 1),
-                                    fontFamily: 'Inter',
-                                    fontSize: 20,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.normal,
-                                    height: 1
-                                ),)
-                            ),
+                            GameSet(data: score),
+                            GameSet(data: score),
+                            GameSet(data: score),
+
                           ],
                         ),
                       ),
