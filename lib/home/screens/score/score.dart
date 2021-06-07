@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:bloc_login/home/screens/clubs/clubs.dart';
 import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
 import 'package:bloc_login/home/screens/filter/filter_page.dart';
+import 'package:bloc_login/home/screens/score/finaltie.dart';
 import 'package:bloc_login/home/screens/score/score_picker.dart';
 import 'package:bloc_login/home/screens/score/set.dart';
+import 'package:bloc_login/home/screens/score/sets.dart';
 import 'package:bloc_login/model/score_model.dart';
 import 'package:bloc_login/repository/tournaments_repository.dart';
 import 'package:flutter/material.dart';
@@ -19,14 +23,20 @@ class ScoreListScreen extends StatefulWidget {
 
 class _ScoreListScreenState extends State<ScoreListScreen> {
   ScoreBloc scoreBloc;
-
+  List winner;
+  List totalScores;
+  StreamController<bool> _controller = StreamController<bool>();
   @override
   void initState() {
     super.initState();
     scoreBloc = BlocProvider.of<ScoreBloc>(context);
     scoreBloc.add(FetchScoreEvent());
   }
-
+  // void _toggle() {
+  //   setState(() {
+  //     _isVisible = !_isVisible;
+  //   });
+  // }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -131,7 +141,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(left: 15.0, top: 0),
+            padding: const EdgeInsets.only(left: 15.0, top: 0, right: 15),
             child: Container(// alignment: Alignment.topLeft,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -213,6 +223,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                 thickness: 2
                             ),
                             Container(
+                              margin: const EdgeInsets.only(top: 20.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
@@ -227,7 +238,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                       ),)
                                   ),
                                   Container(
-                                      child: Text('Раунд 1', textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text(score.planedDate.toString(), textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 20,
@@ -240,11 +251,12 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                               ),
                             ),
                             Container(
+                              margin: const EdgeInsets.only(top: 10.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Container(
-                                      child: Text('Раунд 1', textAlign: TextAlign.left, style: TextStyle(
+                                      child: Text('Название', textAlign: TextAlign.left, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 20,
@@ -254,7 +266,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                       ),)
                                   ),
                                   Container(
-                                      child: Text('Раунд 1', textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text('Тип раунда', textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 20,
@@ -267,31 +279,33 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                               ),
                             ),
                             Container(
+                              margin: const EdgeInsets.only(top: 10.0),
                               child: Align(
                                 alignment: Alignment.topRight,
                                 child: Container(
-                                      child: Text('Раунд 1', textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text('Олимпийская  / 1/2 финала', textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
-                                          height: 1
+                                          height: 1.5 /*PERCENT not supported*/
                                       ),)
                                   ),
                               ),
                             ),
                             Container(
+                              margin: const EdgeInsets.only(top: 3.0),
                               child: Align(
                                 alignment: Alignment.topRight,
                                 child: Container(
-                                      child: Text('Раунд 1', textAlign: TextAlign.right, style: TextStyle(
+                                      child:  Text('Олимпийская  / 1/2 финала', textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
-                                          height: 1
+                                          height: 1.5 /*PERCENT not supported*/
                                       ),)
                                   ),
 
@@ -302,11 +316,12 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                 thickness: 2
                             ),
                             Container(
+                              margin: const EdgeInsets.only(top: 20.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Container(
-                                      child: Text('Раунд 1', textAlign: TextAlign.left, style: TextStyle(
+                                      child: Text('Дата и время', textAlign: TextAlign.left, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 20,
@@ -316,46 +331,48 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                       ),)
                                   ),
                                   Container(
-                                      child: Text('Раунд 1', textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text(score.planedDate.toString(), textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
-                                          height: 1
+                                          height: 1.5 /*PERCENT not supported*/
                                       ),)
                                   ),
                                 ],
                               ),
                             ),
                             Container(
+                              margin: const EdgeInsets.only(top: 10.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Container(
-                                      child: Text('Раунд 1', textAlign: TextAlign.left, style: TextStyle(
+                                      child:Text('По факту', textAlign: TextAlign.left, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
-                                          height: 1
+                                          height: 1.5 /*PERCENT not supported*/
                                       ),)
                                   ),
                                   Container(
-                                      child: Text('Раунд 1', textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text(score.planedDate.toString(), textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
-                                          height: 1
+                                          height: 1.5 /*PERCENT not supported*/
                                       ),)
                                   ),
                                 ],
                               ),
                             ),
                             Container(
+                              margin: const EdgeInsets.only(top: 15.0, right: 10.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
@@ -363,59 +380,135 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                       child: Text(score.rule.setsToWin.toString(), textAlign: TextAlign.left, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 13,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
                                           height: 1
-                                      ),)
+                                      ),),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color:  Color.fromRGBO(239, 243, 245, 1),
+                                      boxShadow: [
+                                        BoxShadow(color: Color.fromRGBO(5, 89, 121, 1),),
+                                      ],
+                                    ),
+                                    height: 20,
+                                    width: 40.0,
                                   ),
                                   Container(
                                       child: Text(score.rule.gamesInSets.toString(), textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 13,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
                                           height: 1
-                                      ),)
+                                      ),),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color:  Color.fromRGBO(239, 243, 245, 1),
+                                      boxShadow: [
+                                        BoxShadow(color: Color.fromRGBO(5, 89, 121, 1),),
+                                      ],
+                                    ),
+                                    height: 20,
+                                    width: 40.0,
                                   ),
                                   Container(
                                       child: Text(score.rule.gamesInSets.toString(), textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 13,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
                                           height: 1
-                                      ),)
+                                      ),),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color:  Color.fromRGBO(239, 243, 245, 1),
+                                      boxShadow: [
+                                        BoxShadow(color: Color.fromRGBO(5, 89, 121, 1),),
+                                      ],
+                                    ),
+                                    height: 20,
+                                    width: 40.0,
                                   ),
                                   Container(
                                       child: Text('10', textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 13,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
                                           height: 1
-                                      ),)
+                                      ),),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color:  Color.fromRGBO(239, 243, 245, 1),
+                                      boxShadow: [
+                                        BoxShadow(color: Color.fromRGBO(5, 89, 121, 1),),
+                                      ],
+                                    ),
+                                    height: 20,
+                                    width: 40.0,
                                   ),
                                   Container(
                                       child: Text('+', textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
-                                          fontSize: 20,
+                                          fontSize: 13,
                                           letterSpacing: 0,
                                           fontWeight: FontWeight.normal,
                                           height: 1
-                                      ),)
+                                      ),),
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color:  Color.fromRGBO(239, 243, 245, 1),
+                                      boxShadow: [
+                                        BoxShadow(color: Color.fromRGBO(5, 89, 121, 1),),
+                                      ],
+                                    ),
+                                    height: 20,
+                                    width: 40.0,
                                   ),
                                 ],
                               ),
 
                             ),
-                            GameSet(data: score),
-                            GameSet(data: score),
-                            GameSet(data: score),
+                            AllGameSets(
+                                data:score,
+                              onChangedSelect: (test){
+                                  _controller.add(test.isVisible);
+                                  print(test.scores);
+                                  print(test.isVisible);
+                              },
+                            ),
+                            FinalTie(
+                              data: score,
+                              stream: _controller.stream,
+                              onChangedSelect: (tie){
+                                print(tie.score);
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20.0),
+                              child: SizedBox(
+                                  width:double.infinity - 20.0,//width of button equal to parent widget
+                                  height: 50,
+                                  child:ElevatedButton(
+                                    child: Text('Отправить'),
+                                    onPressed: () {
+                                      print("hello moto");
+                                    },
+                                  )),
+                            ),
+
+
 
                           ],
                         ),
