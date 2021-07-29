@@ -260,7 +260,7 @@ class Tournament {
     surfaceId = json['surface_id'];
     ruleId = json['rule_id'];
     courtId = json['court_id'];
-    playerTypes = json['player_types'].cast<int>();
+    playerTypes = json['player_types'];
   }
 
   Map<String, dynamic> toJson() {
