@@ -20,15 +20,15 @@ class _AllGameSetsState extends State<AllGameSets> {
 
   @override
   Widget build(BuildContext context) {
-    AllSetsResult results = AllSetsResult(scores: List.filled(widget.data.rule.gamesInSets, null));
-    List winner = List.filled(widget.data.rule.gamesInSets, null);
+    AllSetsResult results = AllSetsResult(scores: List.filled(widget.data.rule.setsToWin, null));
+    List winner = List.filled(widget.data.rule.setsToWin, null);
     int countWinner = 0;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          for(var i = 0; i < widget.data.rule.gamesInSets; i++) GameSet(
+          for(var i = 0; i < widget.data.rule.setsToWin; i++) GameSet(
             setNum: i+1,
             data: widget.data,
             onChangedSelect: (test){

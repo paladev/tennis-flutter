@@ -137,26 +137,26 @@ class _GamesListScreenState extends State<GamesListScreen> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            Text(
-                              games[pos].planed_date, textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  color: Color.fromRGBO(46, 56, 77, 1),
-                                  fontFamily: 'Inter',
-                                  fontSize: 15,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.normal,
-                                  height: 1.5 /*PERCENT not supported*/
-                              ),),
                             // Text(
-                            //   games[pos].player1Name, textAlign: TextAlign.left,
+                            //   games[pos].planed_date, textAlign: TextAlign.left,
                             //   style: TextStyle(
                             //       color: Color.fromRGBO(46, 56, 77, 1),
                             //       fontFamily: 'Inter',
-                            //       fontSize: 20,
+                            //       fontSize: 15,
                             //       letterSpacing: 0,
                             //       fontWeight: FontWeight.normal,
-                            //       height: 1
+                            //       height: 1.5 /*PERCENT not supported*/
                             //   ),),
+                            Text(
+                              games[pos].player1Name.toString() + " - " + games[pos].player2Name.toString(), textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Color.fromRGBO(46, 56, 77, 1),
+                                  fontFamily: 'Inter',
+                                  fontSize: 20,
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.normal,
+                                  height: 1
+                              ),),
                             Padding(
                               padding: const EdgeInsets.only(top: 31.0),
                             ),

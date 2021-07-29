@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bloc_login/api_connection/api_connection.dart';
 import 'package:bloc_login/home/screens/clubs/clubs.dart';
 import 'package:bloc_login/home/screens/clubs/clubs_page.dart';
 import 'package:bloc_login/home/screens/filter/filter_page.dart';
@@ -25,6 +26,8 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
   ScoreBloc scoreBloc;
   List winner;
   List totalScores;
+  List total;
+  List totalTie;
   StreamController<bool> _controller = StreamController<bool>();
   @override
   void initState() {
@@ -484,15 +487,17 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                 data:score,
                               onChangedSelect: (test){
                                   _controller.add(test.isVisible);
-                                  print(test.scores);
-                                  print(test.isVisible);
+                                  // print(test.scores);
+                                  // print(test.isVisible);
+                                  total = test.scores;
                               },
                             ),
                             FinalTie(
                               data: score,
                               stream: _controller.stream,
                               onChangedSelect: (tie){
-                                print(tie.score);
+                                totalTie = tie;
+                                // print(tie.score);
                               },
                             ),
                             Padding(
@@ -503,13 +508,12 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                   child:ElevatedButton(
                                     child: Text('Отправить'),
                                     onPressed: () {
-                                      print("hello moto");
+                                      var newList = total + totalTie;
+                                      print(newList);
+                                      SendResults(score.id, newList);
                                     },
                                   )),
                             ),
-
-
-
                           ],
                         ),
                       ),

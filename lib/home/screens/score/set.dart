@@ -62,6 +62,7 @@ class _GameSetState extends State<GameSet> {
                           widget.onChangedSelect(result);
                         },
                       ),
+                      alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color:  Color.fromRGBO(239, 243, 245, 1),
@@ -90,6 +91,7 @@ class _GameSetState extends State<GameSet> {
                           BoxShadow(color: Color.fromRGBO(5, 89, 121, 1),),
                         ],
                       ),
+                      alignment: Alignment.center,
                       height: 56,
                       width: 56,
                     ),
@@ -136,6 +138,7 @@ class _GameSetState extends State<GameSet> {
                           BoxShadow(color: Color.fromRGBO(5, 89, 121, 1),),
                         ],
                       ),
+                      alignment: Alignment.center,
                       height: 56,
                       width: 56,
                     ),
@@ -157,6 +160,7 @@ class _GameSetState extends State<GameSet> {
                           BoxShadow(color: Color.fromRGBO(5, 89, 121, 1),),
                         ],
                       ),
+                      alignment: Alignment.center,
                       height: 56,
                       width: 56,
                     ),

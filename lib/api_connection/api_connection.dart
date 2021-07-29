@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:bloc_login/dao/user_dao.dart';
 import 'package:bloc_login/model/filter.dart';
 import 'package:bloc_login/model/tournaments.dart';
 import 'package:bloc_login/repository/games_repository.dart';
@@ -201,6 +202,31 @@ Future<ScoreRoundFull> fetchScore(int gid) async {
     ScoreRoundFull score = ScoreRoundFull.fromJson(parsed);
     print(score);
     return score;
+  } else {
+    print(json.decode(response.body).toString());
+    throw Exception(json.decode(response.body));
+  }
+}
+
+Future SendResults(int gid, List results) async {
+  final userDao = UserDao();
+  Info info = await userDao.getInfo(0);
+  final _clubsUrl = _base + "/game/" + "$gid" + "?access-token="+info.token.toString()+"&uid="+info.uid.toString();
+  print(_clubsUrl);
+
+  final Map<String, dynamic> data = new Map<String, dynamic>();
+  data['result'] = results;
+  final http.Response response = await http.patch(
+    _clubsUrl,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(data)
+  );
+  if (response.statusCode == 200) {
+    print(json.decode(response.body).toString());
+    var parsed = json.decode(response.body);
+    print(parsed);
   } else {
     print(json.decode(response.body).toString());
     throw Exception(json.decode(response.body));

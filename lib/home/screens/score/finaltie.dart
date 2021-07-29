@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class FinalTie extends StatefulWidget{
 
   final Stream<bool> stream;
-  final ValueChanged<SetResult> onChangedSelect;
+  final ValueChanged<List> onChangedSelect;
   ScoreRoundFull data;
   FinalTie({this.stream,this.data,this.onChangedSelect});
 
@@ -18,8 +18,8 @@ class _FinalTieState extends State<FinalTie> {
 
   List _playerOneScore = [null,0];
   List _playerTwoScore = [null,0];
-  SetResult result = SetResult(score: [[null,0],[null,0]],isFirstWin: false);
-
+  List result = [[null,0],[null,0]];
+  List data = [[null]];
   bool isVisible = false;
   void _updateVisible(bool newState) {
     setState(() {
@@ -70,8 +70,9 @@ class _FinalTieState extends State<FinalTie> {
                     current: 0,
                     onChangedSelect: (test){
                       _playerOneScore[1] = test;
-                      result.score[0] = _playerOneScore;
-                      widget.onChangedSelect(result);
+                      result[0] = _playerOneScore;
+                      data[0] = result;
+                      widget.onChangedSelect(data);
                     },
                   ),
                   decoration: BoxDecoration(
@@ -104,8 +105,9 @@ class _FinalTieState extends State<FinalTie> {
                     current: 0,
                     onChangedSelect: (test){
                       _playerTwoScore[1] = test;
-                      result.score[1] = _playerTwoScore;
-                      widget.onChangedSelect(result);
+                      result[1] = _playerTwoScore;
+                      data[0] = result;
+                      widget.onChangedSelect(data);
                     },
                   ),
                   decoration: BoxDecoration(
