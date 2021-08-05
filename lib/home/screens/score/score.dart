@@ -241,7 +241,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                       ),)
                                   ),
                                   Container(
-                                      child: Text(score.planedDate.toString(), textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text("test", textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 20,
@@ -334,7 +334,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                       ),)
                                   ),
                                   Container(
-                                      child: Text(score.planedDate.toString(), textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text("test", textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 15,
@@ -362,7 +362,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
                                       ),)
                                   ),
                                   Container(
-                                      child: Text(score.planedDate.toString(), textAlign: TextAlign.right, style: TextStyle(
+                                      child: Text("test", textAlign: TextAlign.right, style: TextStyle(
                                           color: Color.fromRGBO(46, 56, 77, 1),
                                           fontFamily: 'Inter',
                                           fontSize: 15,
