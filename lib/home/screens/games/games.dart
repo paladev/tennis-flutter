@@ -108,7 +108,7 @@ class _GamesListScreenState extends State<GamesListScreen> {
           child: Padding(
             padding: const EdgeInsets.only(left: 15.0, top: 25),
             child: Text(
-              'Список турниров', textAlign: TextAlign.left, style: TextStyle(
+              'Список игр', textAlign: TextAlign.left, style: TextStyle(
                 color: Color.fromRGBO(46, 56, 77, 1),
                 fontFamily: 'Inter',
                 fontSize: 36,
