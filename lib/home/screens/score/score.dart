@@ -142,7 +142,7 @@ class _ScoreListScreenState extends State<ScoreListScreen> {
             ),),
           ),
         ),
-        Expanded(
+        Container(
           child: Padding(
             padding: const EdgeInsets.only(left: 15.0, top: 0, right: 15),
             child: Container(// alignment: Alignment.topLeft,
